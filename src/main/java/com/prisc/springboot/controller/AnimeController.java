@@ -33,8 +33,13 @@ public class AnimeController {
 
     @GetMapping(path = "/{id}")
     public ResponseEntity<Anime> findById(@PathVariable long id){
-        log.info(dateUtil.formatLocalDateTimeToDataBaseStile(LocalDateTime.now()));
+        //log.info(dateUtil.formatLocalDateTimeToDataBaseStile(LocalDateTime.now()));
         return ResponseEntity.ok(animeService.findByIdOrThrowBadRequestException(id));
+    }
+    
+    @GetMapping(path = "/find")
+    public ResponseEntity<List<Anime>> findByName(@RequestParam String name ){
+        return ResponseEntity.ok(animeService.findByName(name));
     }
 
     @PostMapping
