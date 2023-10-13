@@ -1,5 +1,6 @@
 package com.prisc.springboot.service;
 
+import com.prisc.exception.BadRequestException;
 import com.prisc.springboot.domain.Anime;
 import com.prisc.springboot.mapper.AnimeMapper;
 import com.prisc.springboot.repository.AnimeRepository;
@@ -28,7 +29,7 @@ public class AnimeService {
 
     public Anime findByIdOrThrowBadRequestException(long id){
         return animeRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Anime not found."));
+                .orElseThrow(() -> new BadRequestException("Anime not Found."));
     }
 
     public Anime save(AnimePostRequestBody animePostRequestBody) {
