@@ -1,15 +1,13 @@
 package com.prisc.springboot.service;
 
-import com.prisc.exception.BadRequestException;
+import com.prisc.springboot.exception.BadRequestException;
 import com.prisc.springboot.domain.Anime;
 import com.prisc.springboot.mapper.AnimeMapper;
 import com.prisc.springboot.repository.AnimeRepository;
 import com.prisc.springboot.request.AnimePostRequestBody;
 import com.prisc.springboot.request.AnimePutRequestBody;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
