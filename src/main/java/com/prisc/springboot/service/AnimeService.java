@@ -8,6 +8,7 @@ import com.prisc.springboot.request.AnimePostRequestBody;
 import com.prisc.springboot.request.AnimePutRequestBody;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -30,9 +31,10 @@ public class AnimeService {
                 .orElseThrow(() -> new BadRequestException("Anime not Found."));
     }
 
+    @Transactional
     public Anime save(AnimePostRequestBody animePostRequestBody) {
-        System.out.println("animePostRequestBody " + animePostRequestBody.getName());
-        System.out.println("AnimeMapper" + AnimeMapper.INSTANCE.toAnime(animePostRequestBody));
+        //System.out.println("animePostRequestBody " + animePostRequestBody.getName());
+        //System.out.println("AnimeMapper" + AnimeMapper.INSTANCE.toAnime(animePostRequestBody));
         return animeRepository.save(AnimeMapper.INSTANCE.toAnime(animePostRequestBody));
     }
 
