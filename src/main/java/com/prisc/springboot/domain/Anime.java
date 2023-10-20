@@ -19,7 +19,6 @@ public class Anime {
     private Long id;
     private String name;
 
-
     public Anime(String name) {
         this.name = name;
     }
