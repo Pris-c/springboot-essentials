@@ -3,8 +3,7 @@ package com.prisc.springboot.client;
 import com.prisc.springboot.domain.Anime;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
@@ -32,7 +31,27 @@ public class SpringClient {
                 HttpMethod.GET,null, new ParameterizedTypeReference<>() {});
         log.info(exchange.getBody());
 
+        /*
+        // RestTemplate POST: postForObject
+        Anime kingdon = Anime.builder().name("Kingdon").build();
+        Anime kingdonSaved = new RestTemplate().postForObject("http://localhost:8080/animes", kingdon, Anime.class);
+        log.info("saved anime {} ", kingdonSaved);
+        */
 
+        // RestTemplate POST
+        Anime chanpignon = Anime.builder().name("Champignon Samurai").build();
+        ResponseEntity<Anime> champgnonSaved = new RestTemplate()
+                .exchange("http://localhost:8080/animes",
+                        HttpMethod.POST,
+                        new HttpEntity<>(chanpignon, createJsonHeader()),
+                        Anime.class);
+        log.info("saved anime {} ", champgnonSaved);
 
+    }
+
+    private static HttpHeaders createJsonHeader() {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+        return httpHeaders;
     }
 }
