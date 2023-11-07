@@ -26,23 +26,24 @@ import java.util.List;
 public class AnimeController {
 
     private final AnimeService animeService;
-    private final DateUtil dateUtil;
+    // Removido DateUtil para simplificar testes
+    // private final DateUtil dateUtil;
 
     @GetMapping
     public ResponseEntity<Page<Anime>> list(Pageable pageable){
-        log.info(dateUtil.formatLocalDateTimeToDataBaseStile(LocalDateTime.now()));
+        //log.info(dateUtil.formatLocalDateTimeToDataBaseStile(LocalDateTime.now()));
         return ResponseEntity.ok(animeService.listAll(pageable));
     }
 
     @GetMapping(path = "/all")
     public ResponseEntity<List<Anime>> listAll(){
-        log.info(dateUtil.formatLocalDateTimeToDataBaseStile(LocalDateTime.now()));
+        //log.info(dateUtil.formatLocalDateTimeToDataBaseStile(LocalDateTime.now()));
         return ResponseEntity.ok(animeService.listAllNotPageble());
     }
 
     @GetMapping(path = "/{id}")
     public ResponseEntity<Anime> findById(@PathVariable long id){
-        log.info(dateUtil.formatLocalDateTimeToDataBaseStile(LocalDateTime.now()));
+        //log.info(dateUtil.formatLocalDateTimeToDataBaseStile(LocalDateTime.now()));
         return ResponseEntity.ok(animeService.findByIdOrThrowBadRequestException(id));
     }
     

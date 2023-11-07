@@ -1,6 +1,7 @@
 package com.prisc.springboot.repository;
 
 import com.prisc.springboot.domain.Anime;
+import com.prisc.springboot.util.AnimeCreator;
 import jakarta.validation.ConstraintViolationException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -23,7 +24,7 @@ class AnimeRepositoryTest {
     @Test
     @DisplayName("Save persists anime when Successful")
     void save_PersistenceAnime_WhenSuccessful(){
-        Anime animeToBeSaved = createAnime();
+        Anime animeToBeSaved = AnimeCreator.createAnimeToBeSaved();
         Anime animeSaved = this.animeRepository.save(animeToBeSaved);
 
         Assertions.assertThat(animeSaved).isNotNull();
@@ -34,7 +35,7 @@ class AnimeRepositoryTest {
     @Test
     @DisplayName("Save updates anime when Successful")
     void save_UpdatesAnime_WhenSuccessful(){
-        Anime animeToBeSaved = createAnime();
+        Anime animeToBeSaved = AnimeCreator.createAnimeToBeSaved();
         Anime animeSaved = this.animeRepository.save(animeToBeSaved);
         animeSaved.setName("Overload");
         Anime animeUpdated = this.animeRepository.save(animeSaved);
@@ -48,7 +49,7 @@ class AnimeRepositoryTest {
     @Test
     @DisplayName("Delete removes anime when Successful")
     void delete_RemovesAnime_WhenSuccessful(){
-        Anime animeToBeSaved = createAnime();
+        Anime animeToBeSaved = AnimeCreator.createAnimeToBeSaved();
         Anime animeSaved = this.animeRepository.save(animeToBeSaved);
 
         this.animeRepository.delete(animeSaved);
@@ -59,11 +60,10 @@ class AnimeRepositoryTest {
 
     }
 
-
     @Test
     @DisplayName("Find By Name returns anime when Successful")
     void findByName_ReturnsListOfAnime_WhenSuccessful(){
-        Anime animeToBeSaved = createAnime();
+        Anime animeToBeSaved = AnimeCreator.createAnimeToBeSaved();
         Anime animeSaved = this.animeRepository.save(animeToBeSaved);
 
         String name = animeSaved.getName();
@@ -100,10 +100,6 @@ class AnimeRepositoryTest {
     }
 
 
-    private Anime createAnime(){
-        return Anime.builder()
-                .name("Anime Test").
-                build();
-    }
+ 
 
 }
